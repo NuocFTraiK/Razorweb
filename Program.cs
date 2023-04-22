@@ -1,6 +1,7 @@
 using CS54.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CS54
 {
@@ -15,6 +16,8 @@ namespace CS54
             {
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
+            builder.Services.AddDbContext<MyBlogContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("ArticleContext") ?? throw new InvalidOperationException("Connection string 'ArticleContext' not found.")));
 
             // Add services to the container.
             builder.Services.AddRazorPages();
