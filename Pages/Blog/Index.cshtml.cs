@@ -42,7 +42,7 @@ namespace CS54.Pages_Blog
 			}
 
 			var qr = await _context.Articles.OrderBy(a => a.Created)
-                .Skip((CurrentPage-1)*5)
+                .Skip((CurrentPage-1)*ItemsPerPage)
                 .Take(ItemsPerPage)
                 .ToListAsync();
             
